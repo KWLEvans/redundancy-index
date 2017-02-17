@@ -34,6 +34,10 @@
         function test_countRepeats_capitalization() {
           $this->check("Art", "aRT is my favorite because I love ArT", 2);
         }
+
+        function test_countRepeats_punctuation() {
+          $this->check("art", "Who doesn't love art?", 1);
+        }
     }
 
 ?>
