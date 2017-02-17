@@ -41,10 +41,10 @@
             $counts_by_number = [];
             foreach($this->word_counts as $word => $count) {
                 if(array_key_exists($count, $counts_by_number)) {
-                  array_push($counts_by_number[$count], $word);
-                  sort($counts_by_number[$count]);
+                    array_push($counts_by_number[$count], $word);
+                    sort($counts_by_number[$count]);
                 } else {
-                  $counts_by_number[$count] = [$word];
+                    $counts_by_number[$count] = [$word];
                 }
             }
             krsort($counts_by_number);
@@ -55,22 +55,22 @@
             $counts_by_letter = [];
             foreach($this->word_counts as $word => $count) {
                 if (is_numeric(substr($word, 0, 1))) {
-                  if(array_key_exists("#", $counts_by_letter)) {
-                    $counts_by_letter["#"][$word] = $count;
-                    arsort($counts_by_letter["#"]);
-                  } else {
-                    $counts_by_letter["#"] = [];
-                    $counts_by_letter["#"][$word] = $count;
-                    arsort($counts_by_letter["#"]);
-                  }
+                    if(array_key_exists("#", $counts_by_letter)) {
+                        $counts_by_letter["#"][$word] = $count;
+                        arsort($counts_by_letter["#"]);
+                    } else {
+                        $counts_by_letter["#"] = [];
+                        $counts_by_letter["#"][$word] = $count;
+                        arsort($counts_by_letter["#"]);
+                    }
                 } else {
                     if(array_key_exists($word[0], $counts_by_letter)) {
-                      $counts_by_letter[$word[0]][$word] = $count;
-                      arsort($counts_by_letter[$word[0]]);
+                        $counts_by_letter[$word[0]][$word] = $count;
+                        arsort($counts_by_letter[$word[0]]);
                     } else {
-                      $counts_by_letter[$word[0]] = [];
-                      $counts_by_letter[$word[0]][$word] = $count;
-                      arsort($counts_by_letter[$word[0]]);
+                        $counts_by_letter[$word[0]] = [];
+                        $counts_by_letter[$word[0]][$word] = $count;
+                        arsort($counts_by_letter[$word[0]]);
                     }
                 }
             }
@@ -80,9 +80,9 @@
 
         function countRepeatsParse($input)
         {
-          $input = strtolower($input);
-          $input = str_replace($this->punctuation, "", $input);
-          return $input;
+            $input = strtolower($input);
+            $input = str_replace($this->punctuation, "", $input);
+            return $input;
         }
 
         function save() {

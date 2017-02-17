@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="css/styles.css" rel="stylesheet" type="text/css">
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <title>Redundancy Index - {% block title %}Home{% endblock %}</title>
-  </head>
-  <body>
-    <div class="jumbotron jumbotron-fluid">
-      <h1>{% block header %}Let's see how redundant you are!{% endblock %}</h1>
-    </div>
-    <div class="container">
-      {% block content %}
-        <form id="input-form" action="/result" method="post">
-          <div id="needle-fields" class="form-group">
-            <label for="needle">Word to count: </label>
-            <input id="needle" name="needle" type="text" class="form-control" required>
-          </div>
-          <div id="haystack-fields" class="form-group">
-            <label for="haystack">Text to search in: </label>
-            <textarea id="haystack" name="haystack" class="form-control" rows="5" required></textarea>
-          </div>
-          <button id="form-submit-button" type="submit" class="btn btn-lg bg-success">Search</button>
-        </form>
-        <div class="row">
-          <div class="btn-group btn-group-md col justify-content-center">
-            <button id="set-to-search" class="btn bg-primary selected">Search by word</button>
-            <button id="set-to-enumerate" class="btn bg-warning">Enumerate all</button>
-          </div>
+    <head>
+        <meta charset="utf-8">
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="css/styles.css" rel="stylesheet" type="text/css">
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <title>Redundancy Index - {% block title %}Home{% endblock %}</title>
+    </head>
+    <body>
+        <div class="jumbotron jumbotron-fluid">
+            <h1>{% block header %}Let's see how redundant you are!{% endblock %}</h1>
         </div>
-      {% endblock %}
-    </div>
-  </body>
+        <div class="container">
+            {% block content %}
+                <form id="input-form" action="/result" method="post">
+                    <div id="needle-fields" class="form-group">
+                        <label for="needle">Word to count: </label>
+                        <input id="needle" name="needle" type="text" class="form-control" required>
+                    </div>
+                    <div id="haystack-fields" class="form-group">
+                        <label for="haystack">Text to search in: </label>
+                        <textarea id="haystack" name="haystack" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <button id="form-submit-button" type="submit" class="btn btn-lg bg-success">Search</button>
+                </form>
+                <div class="row">
+                    <div class="btn-group btn-group-md col justify-content-center">
+                        <button id="set-to-search" class="btn bg-primary selected">Search by word</button>
+                        <button id="set-to-enumerate" class="btn bg-warning">Enumerate all</button>
+                    </div>
+                </div>
+            {% endblock %}
+        </div>
+    </body>
 </html>
