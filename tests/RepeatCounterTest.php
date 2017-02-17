@@ -30,6 +30,10 @@
         function test_countRepeats_multiInstanceInString() {
           $this->check("art", "i like art because art is cool", 2);
         }
+
+        function test_countRepeats_capitalization() {
+          $this->check("Art", "aRT is my favorite because I love ArT", 2);
+        }
     }
 
 ?>
