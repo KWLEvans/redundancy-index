@@ -4,6 +4,11 @@
     require_once __DIR__."/../vendor/autoload.php";
     require_once __DIR__."/../src/RepeatCounter.php";
 
+    session_start();
+    if(empty($_SESSION["word-count"])) {
+      $_SESSION["word-count"] = "";
+    }
+
     $app = new Silex\Application;
 
     $app->register(new Silex\Provider\TwigServiceProvider, ["twig.path" => __DIR__."/../views"]);
@@ -16,7 +21,12 @@
       $needle = $_POST["needle"];
       $haystack = $_POST["haystack"];
       $new_RepeatCounter = new RepeatCounter;
-      $result = $new_RepeatCounter->countRepeats($needle, $haystack);
+      $result;
+      if ($needle) {
+          $result = $new_RepeatCounter->countRepeats($needle, $haystack);
+      } else {
+          $result = $new_RepeatCounter->enumerateAll($haystack);
+      }
       return $app["twig"]->render("result.html.twig", ["needle" => $needle, "result" => $result]);
     });
 

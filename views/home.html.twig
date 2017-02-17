@@ -12,17 +12,23 @@
     <div class="container">
       {% block content %}
         <h1>Let's see how redundant you are!</h1>
-        <form action="/result" method="post" class="form-group">
-          <label for="needle">Word to count: </label>
-          <input id="needle" name="needle" type="text" class="form-control">
-          <label for="haystack">Text to search in: </label>
-          <textarea id="haystack" name="haystack" class="form-control"></textarea>
+        <form action="/result" method="post">
+          <div id="needle-fields" class="form-group">
+            <label for="needle">Word to count: </label>
+            <input id="needle" name="needle" type="text" class="form-control">
+          </div>
+          <div id="haystack-fields" class="form-group">
+            <label for="haystack">Text to search in: </label>
+            <textarea id="haystack" name="haystack" class="form-control" rows="5"></textarea>
+          </div>
           <button id="form-submit-button" type="submit" class="btn">Search</button>
         </form>
-        <!-- <div class="btn-group btn-group-lg">
-          <button id="set-to-search" class="btn">Search by word</button>
-          <button id="set-to-enumerate" class="btn">Enumerate all</button>
-        </div> -->
+        <div class="row">
+          <div class="btn-group btn-group-lg col justify-content-center">
+            <button id="set-to-search" class="btn bg-primary">Search by word</button>
+            <button id="set-to-enumerate" class="btn bg-warning">Enumerate all</button>
+          </div>
+        </div>
       {% endblock %}
     </div>
   </body>

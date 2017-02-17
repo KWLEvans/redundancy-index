@@ -3,5 +3,29 @@
 {% block title %}Results{% endblock %}
 
 {% block content %}
-  <h2>You used "{{ needle }}" {{ result }} times.</h2>
+
+  {% if result is iterable %}
+    {% for key in result|keys %}
+      <div class="card">
+        <h3 class="card-header">{{ key }}</h3>
+        <div class="card-block">
+          <ul>
+            {% if result[key][0] is not defined %}
+              {% for word, count in result[key] %}
+                <li><strong>{{ word }}:</strong> {{ count }}</li>
+              {% endfor %}
+            {% else  %}
+              {% for word in result[key] %}
+                <li><strong>{{ word }}</strong></li>
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    {% endfor %}
+
+  {% else %}
+    <h2>You used "{{ needle }}" {{ result }} times.</h2>
+  {% endif %}
+
 {% endblock %}
