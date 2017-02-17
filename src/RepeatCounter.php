@@ -2,11 +2,14 @@
 
     class RepeatCounter
     {
-        function countRepeats($word, $string)
+        function countRepeats($needle, $haystack)
         {
             $number_of_instances = 0;
-            if ($word == $string) {
-              $number_of_instances++;
+            $words_array = explode(" ", $haystack);
+            foreach ($words_array as $word) {
+                if ($needle == $word) {
+                    $number_of_instances++;
+                }
             }
             return $number_of_instances;
         }

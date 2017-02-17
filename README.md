@@ -38,6 +38,7 @@ Composer
 |--------|---------|-----|------|
 |The app will accept a single letter string and return 1 if it matches a second single-letter string|two perfectly identical strings are the easiest match possible|"a", "a"|1|
 |The app will accept a multi-letter string and return 1 if it matches another multi-letter string|Almost identical to the previous test, this spec will control for differences in behavior with multiple letters|"art", "art"|1|
+|The app will be able to tally one instance of the word in a longer string|this can test iteration through a string separately from tallying multiple instances of the word|"art", "i like art"|1|
 |The app will be able to tally multiple instances of a word in a string|without incorporating too many of the other specs, this will be able to narrow down a failed test to having multiple words|"art", "i like art because art is cool"|2|
 |The app will be able to make single matches regardless of capitalization|assuming the previous tests are passing, the only difference here is capitalization|"Art", "aRT"|1|
 |The app will be able to match words regardless of punctuation|similar reasoning to above test|"art!","art?"|
