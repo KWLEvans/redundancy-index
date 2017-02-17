@@ -1,0 +1,30 @@
+{% extends "home.html.twig" %}
+
+{% block title %}Enumerate{% endblock %}
+
+{% block header %}Here are your results<a href="/"><button class="btn btn-md bg-success">Home</button></a>{% endblock %}
+
+{% block content %}
+<form class="btn-group btn-group-lg col justify-content-center" action="" id="sort-form">
+  <button id="sort-numerically-button" class="btn">Sort by number of instances</button>
+  <button id="sort-alphabetically-button" class="btn">Sort alphabetically by word</button>
+</form>
+{% for key in result|keys %}
+  <div class="card">
+    <h3 class="card-header">{{ key }}<em>{{ result[key]|length }} entries</em><img src="img/plus.png" class="plus-image"><img src="img/minus.png" class="minus-image"></h3>
+    <div class="card-block">
+      <ul>
+        {% if result[key][0] is not defined %}
+          {% for word, count in result[key] %}
+            <li><strong>{{ word }}:</strong> {{ count }}</li>
+          {% endfor %}
+        {% else  %}
+          {% for word in result[key] %}
+            <li><strong>{{ word }}</strong></li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

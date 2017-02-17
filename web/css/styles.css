@@ -1,0 +1,33 @@
+img {
+  height: 30px;
+  width: 30px;
+  float: right;
+}
+
+em {
+  font-size: .5em;
+  position: absolute;
+  left: 80px;
+  top: 20px;
+}
+
+a {
+  float: right;
+  margin-right: 50px;
+}
+
+.selected, .selected:focus {
+  box-shadow: 3px 3px 10px black inset;
+}
+
+.minus-image {
+  display: none;
+}
+
+.card-block {
+  display: none;
+}
+
+.jumbotron h1 {
+  padding-left: 100px;
+}

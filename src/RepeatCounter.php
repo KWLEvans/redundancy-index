@@ -3,7 +3,8 @@
     class RepeatCounter
     {
         //This array exists as part of my effort to avoid regex
-        private $punctuation = [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "!", "?", "/", "'s"];
+        private $punctuation = [".", ",", ";", ":", "(", ")", "[", "]", "{", "}", "!", "?", "/", "'s", "\"", "'", "$"];
+        private $word_counts = [];
 
         function countRepeats($needle, $haystack)
         {
@@ -21,23 +22,24 @@
 
         function enumerateAll($input)
         {
-          $input = $this->countRepeatsParse($input);
-          $input = explode(" ", $input);
-          $word_counts = [];
+            $input = $this->countRepeatsParse($input);
+            $input = explode(" ", $input);
+            $word_counts = [];
 
-          foreach($input as $word) {
-              if(array_key_exists($word, $word_counts)) {
-                $word_counts[$word]++;
-              } else {
-                $word_counts[$word] = 1;
-              }
-          }
-          return $this->sortResultsNumerically($word_counts);
+            foreach($input as $word) {
+                if(array_key_exists($word, $word_counts)) {
+                    $word_counts[$word]++;
+                } else {
+                    $word_counts[$word] = 1;
+                }
+            }
+            $this->word_counts = $word_counts;
+            return $this->sortResultsAlphabetically();
         }
 
-        function sortResultsNumerically($word_counts) {
+        function sortResultsNumerically() {
             $counts_by_number = [];
-            foreach($word_counts as $word => $count) {
+            foreach($this->word_counts as $word => $count) {
                 if(array_key_exists($count, $counts_by_number)) {
                   array_push($counts_by_number[$count], $word);
                   sort($counts_by_number[$count]);
@@ -49,16 +51,27 @@
             return $counts_by_number;
         }
 
-        function sortResultsAlphabetically($word_counts) {
+        function sortResultsAlphabetically() {
             $counts_by_letter = [];
-            foreach($word_counts as $word => $count) {
-                if(array_key_exists($word[0], $counts_by_letter)) {
-                  $counts_by_letter[$word[0]][$word] = $count;
-                  arsort($counts_by_letter[$word[0]]);
+            foreach($this->word_counts as $word => $count) {
+                if (is_numeric(substr($word, 0, 1))) {
+                  if(array_key_exists("#", $counts_by_letter)) {
+                    $counts_by_letter["#"][$word] = $count;
+                    arsort($counts_by_letter["#"]);
+                  } else {
+                    $counts_by_letter["#"] = [];
+                    $counts_by_letter["#"][$word] = $count;
+                    arsort($counts_by_letter["#"]);
+                  }
                 } else {
-                  $counts_by_letter[$word[0]] = [];
-                  $counts_by_letter[$word[0]][$word] = $count;
-                  arsort($counts_by_letter[$word[0]]);
+                    if(array_key_exists($word[0], $counts_by_letter)) {
+                      $counts_by_letter[$word[0]][$word] = $count;
+                      arsort($counts_by_letter[$word[0]]);
+                    } else {
+                      $counts_by_letter[$word[0]] = [];
+                      $counts_by_letter[$word[0]][$word] = $count;
+                      arsort($counts_by_letter[$word[0]]);
+                    }
                 }
             }
             ksort($counts_by_letter);
@@ -73,15 +86,15 @@
         }
 
         function save() {
-          $_SESSION["word-count"] = $this;
+            $_SESSION["word-count"] = $this;
         }
 
         static function getActiveWordCount() {
-          return $_SESSION["word-count"];
+            return $_SESSION["word-count"];
         }
 
         static function clearActiveWordCount() {
-          $_SESSION["word-count"] = "";
+            $_SESSION["word-count"] = "";
         }
     }
 

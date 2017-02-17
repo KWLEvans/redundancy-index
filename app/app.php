@@ -6,10 +6,12 @@
 
     session_start();
     if(empty($_SESSION["word-count"])) {
-      $_SESSION["word-count"] = "";
+        $_SESSION["word-count"] = "";
     }
 
     $app = new Silex\Application;
+
+    $app["debug"] = true;
 
     $app->register(new Silex\Provider\TwigServiceProvider, ["twig.path" => __DIR__."/../views"]);
 
@@ -18,16 +20,28 @@
     });
 
     $app->post("/result", function() use ($app) {
-      $needle = $_POST["needle"];
-      $haystack = $_POST["haystack"];
-      $new_RepeatCounter = new RepeatCounter;
-      $result;
-      if ($needle) {
-          $result = $new_RepeatCounter->countRepeats($needle, $haystack);
-      } else {
-          $result = $new_RepeatCounter->enumerateAll($haystack);
-      }
-      return $app["twig"]->render("result.html.twig", ["needle" => $needle, "result" => $result]);
+        $new_RepeatCounter = new RepeatCounter;
+        $result = $new_RepeatCounter->countRepeats($_POST["needle"], $_POST["haystack"]);
+        return $app["twig"]->render("result.html.twig", ["needle" => $_POST["needle"], "result" => $result]);
+    });
+
+    $app->post("/enumerate", function() use ($app) {
+        $new_RepeatCounter = new RepeatCounter;
+        $result = $new_RepeatCounter->enumerateAll($_POST["haystack"]);
+        $new_RepeatCounter->save();
+        return $app["twig"]->render("enumerate.html.twig", ["result" => $result]);
+    });
+
+    $app->get("/numerical", function() use ($app) {
+        $new_RepeatCounter = RepeatCounter::getActiveWordCount();
+        $result = $new_RepeatCounter->sortResultsNumerically();
+        return $app["twig"]->render("enumerate.html.twig", ["result" => $result]);
+    });
+    
+    $app->get("/alphabetical", function() use ($app) {
+        $new_RepeatCounter = RepeatCounter::getActiveWordCount();
+        $result = $new_RepeatCounter->sortResultsAlphabetically();
+        return $app["twig"]->render("enumerate.html.twig", ["result" => $result]);
     });
 
     return $app;
