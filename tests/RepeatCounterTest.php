@@ -38,6 +38,10 @@
         function test_countRepeats_punctuation() {
           $this->check("art", "Who doesn't love art?", 1);
         }
+
+        function test_countRepeats_partials() {
+          $this->check("art", "apart from the cart, the artist got his start at the art mart", 1);
+        }
     }
 
 ?>
