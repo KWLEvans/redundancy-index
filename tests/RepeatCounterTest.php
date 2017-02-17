@@ -18,6 +18,10 @@
         function test_countRepeats_singleLetter() {
           $this->check("a", "a", 1);
         }
+
+        function test_countRepeats_multiLetter() {
+          $this->check("art", "art", 1);
+        }
     }
 
 ?>
