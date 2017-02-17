@@ -26,6 +26,10 @@
         function test_countRepeats_singleInstanceInString() {
           $this->check("art", "i like art", 1);
         }
+
+        function test_countRepeats_multiInstanceInString() {
+          $this->check("art", "i like art because art is cool", 2);
+        }
     }
 
 ?>
